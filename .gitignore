@@ -6,3 +6,7 @@
 *.o
 *.so
 src/Makevars
+*.swp
+config.log
+config.status
+autom4te.cache/
