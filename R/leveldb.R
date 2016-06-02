@@ -1,7 +1,7 @@
 
 setClass(
   Class = "LevelDB",
-  representation = representation(path = "character", ptr = "externalptr"))
+  slots = list(path = "character", ptr = "externalptr"))
 
 
 open.leveldb <- function(path, create = FALSE){
