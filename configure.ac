@@ -87,7 +87,7 @@ AC_CHECK_HEADER([leveldb/write_batch.h],
 				 exit 1
 				])
 
-# check for arrayfire lib
+# check for leveldb lib
 AC_MSG_CHECKING([for libleveldb.so])
 LDFLAGS="${LDFLAGS} -lleveldb"
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
