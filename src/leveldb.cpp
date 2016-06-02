@@ -32,7 +32,6 @@ Rcpp::CharacterVector cppDbGet(SEXP xp,
 {
   Rcpp::XPtr<leveldb::DB> ptr(xp);
 
-  // prepare batch
   Rcpp::CharacterVector value_vec;
   for(std::vector<std::string>::const_iterator it_key = keys.begin();
       it_key != keys.end(); ++it_key){
