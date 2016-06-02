@@ -101,3 +101,31 @@ void cppDbDelete(SEXP xpt,
   // TODO: check status
 }
 
+
+// [[Rcpp::export]]
+Rcpp::List cppApply(SEXP xpt,
+              Rcpp::Function fun,
+              const uint num_item)
+{
+  Rcpp::XPtr<leveldb::DB> ptr(xpt);
+
+  leveldb::Iterator *it = ptr->NewIterator(leveldb::ReadOptions());
+  Rcpp::List result_list;
+  uint count_item = 0;
+  for(it->SeekToFirst(); it->Valid(); it->Next()){
+    Rcpp::CharacterVector key_value = Rcpp::CharacterVector::create(
+      Rcpp::Named("key") = it->key().ToString(),
+      Rcpp::Named("value") = it->value().ToString());
+
+    result_list.push_back(Rcpp::as<Rcpp::List>(fun(key_value)));
+
+    count_item++;
+    if(num_item > 0 && count_item >= num_item){
+      break;
+    }
+  }
+
+  delete it;
+
+  return result_list;
+}
