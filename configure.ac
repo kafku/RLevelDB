@@ -104,7 +104,7 @@ leveldb::WriteBatch batch;]])],
 
 
 AC_SUBST([LEVELDB_INCLUDE], ["-I${with_leveldb_headers}"])
-AC_SUBST([LEVELDB_LIBS], ["-L${with_leveldb_libs}"])
+AC_SUBST([LEVELDB_LIBS], ["-L${with_leveldb_libs} -lleveldb"])
 
 AC_CONFIG_FILES([src/Makevars])
 AC_OUTPUT
