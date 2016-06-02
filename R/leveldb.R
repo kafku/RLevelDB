@@ -84,6 +84,7 @@ setMethod(
   })
 
 
+#' @export
 OpenLevelDB <- function(path, create = FALSE){
   if(!create && !file.exists(path)){
     stop(paste0("cannot find ", path))
