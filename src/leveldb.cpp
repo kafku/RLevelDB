@@ -26,4 +26,28 @@ SEXP cppOpenLevelDB(const std::string &path, const bool create)
   return ptr;
 }
 
+// [[Rcpp::export]]
+Rcpp::CharacterVector cppDbGet(SEXP xp,
+                               const std::vector<std::string> &keys)
+{
+  Rcpp::XPtr<leveldb::DB> ptr(xp);
+
+  // prepare batch
+  Rcpp::CharacterVector value_vec;
+  for(std::vector<std::string>::const_iterator it_key = keys.begin();
+      it_key != keys.end(); ++it_key){
+    std::string value;
+    leveldb::Status status = ptr->Get(leveldb::ReadOptions(),
+                                      leveldb::Slice(*it_key), &value);
+    if(status.ok()){
+      value_vec.push_back(value);
+    }
+    else{
+      value_vec.push_back(NA_STRING);
+    }
+  }
+
+  return value_vec;
+}
+
 
