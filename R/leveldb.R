@@ -1,10 +1,11 @@
 
+#' @export
 setClass(
   Class = "LevelDB",
   slots = list(path = "character", ptr = "externalptr"))
 
 
-open.leveldb <- function(path, create = FALSE){
+#' @export
 OpenLevelDB <- function(path, create = FALSE){
   if(!create && !file.exists(path)){
     stop(paste0("cannot find ", path))

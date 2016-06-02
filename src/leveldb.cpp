@@ -1,3 +1,6 @@
+//' @useDynLib RLevelDB
+//' @importFrom Rcpp evalCpp
+
 #include <Rcpp.h>
 #include <leveldb/db.h>
 #include <leveldb/write_batch.h>
