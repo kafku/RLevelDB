@@ -78,3 +78,27 @@ void cppDbPut(SEXP xpt,
   // TODO: check status
 }
 
+// [[Rcpp::export]]
+void cppDbDelete(SEXP xpt,
+              const std::vector<std::string> &keys,
+              const bool sync)
+{
+  Rcpp::XPtr<leveldb::DB> ptr(xpt);
+
+  // prepare batch
+  leveldb::WriteBatch batch;
+  for(std::vector<std::string>::const_iterator it_key = keys.begin();
+      it_key != keys.end(); ++it_key){
+    batch.Delete(leveldb::Slice(*it_key));
+  }
+
+  // set options
+  leveldb::WriteOptions write_options;
+  write_options.sync = sync;
+
+  // write to db
+  leveldb::Status status = ptr->Write(write_options, &batch);
+
+  // TODO: check status
+}
+

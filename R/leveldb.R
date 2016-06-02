@@ -55,6 +55,35 @@ setMethod(
   definition = function(db, keys, values){
     put.leveldb(db, keys, values)
   })
+
+
+#' @export
+setGeneric(
+  name = "dbDelete",
+  def = function(db, keys, sync = FALSE){
+    standardGeneric('dbDelete')
+  })
+
+delete.leveldb <- function(db, keys, sync = FALSE){
+  cppDbDelete(db@ptr, keys, sync)
+}
+
+setMethod(
+  f = "dbDelete",
+  signature = signature(db = "LevelDB", keys = "character", sync = "logical"),
+  definition = function(db, keys, sync){
+    delete.leveldb(db, keys, sync)
+  })
+
+
+setMethod(
+  f = "dbDelete",
+  signature = signature(db = "LevelDB", keys = "character", sync = "missing"),
+  definition = function(db, keys){
+    delete.leveldb(db, keys)
+  })
+
+
 OpenLevelDB <- function(path, create = FALSE){
   if(!create && !file.exists(path)){
     stop(paste0("cannot find ", path))
