@@ -1,9 +1,17 @@
 Package: RLevelDB
 Type: Package
-Title: What the Package Does (Title Case)
+Title: R interface for LevelDB
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Kazuki Fukui
+Maintainer: Kazuki Fukui <kazunoko93+github@gmail.com>
+Description:
+License: GPL (>= 2)
+Depends:
+    R (>= 3.2.0)
+Imports:
+    Rcpp (>= 0.12.5)
+LinkingTo: Rcpp
+URL: https://github.com/kafku/RLevelDB
+BugReports: https://github.com/kafku/RLevelDB/issues
 LazyData: TRUE
+RoxygenNote: 5.0.1
