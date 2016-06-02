@@ -4,13 +4,13 @@ setClass(
   Class = "LevelDB",
   slots = list(path = "character", ptr = "externalptr"))
 
+#' @export
 setGeneric(
   name = "dbGet",
   def = function(db, keys){
     standardGeneric('dbGet')
   })
 
-#' @export
 setMethod(
   f = "dbGet",
   signature = signature(db = "LevelDB", keys = "character"),
