@@ -1,6 +1,6 @@
 # RLevelDB
 
-R interface for LevelDB.
+R interface for [LevelDB](https://github.com/google/leveldb).
 
 ## Examples
 
