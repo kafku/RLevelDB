@@ -52,6 +52,31 @@ Rcpp::CharacterVector cppDbGet(SEXP xp,
   return value_vec;
 }
 
+// [[Rcpp::export]]
+Rcpp::List cppDbGetRaw(SEXP xp,
+                       const std::vector<std::string> &keys)
+{
+  Rcpp::XPtr<leveldb::DB> ptr(xp);
+
+  Rcpp::List raw_value_list;
+  for(std::vector<std::string>::const_iterator it_key = keys.begin();
+      it_key != keys.end(); ++it_key){
+    std::string value;
+    leveldb::Status status = ptr->Get(leveldb::ReadOptions(),
+                                      leveldb::Slice(*it_key), &value);
+
+    if(status.ok()){
+      // convert to RawVector
+      Rcpp::RawVector raw_vec(value.begin(), value.end());
+      raw_value_list.push_back(raw_vec);
+    }
+    else{
+      raw_value_list.push_back(R_NilValue);
+    }
+  }
+
+  return raw_value_list;
+}
 
 
 // [[Rcpp::export]]

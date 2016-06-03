@@ -21,6 +21,20 @@ setMethod(
 
 #' @export
 setGeneric(
+  name = "dbGetRaw",
+  def = function(db, keys){
+    standardGeneric('dbGetRaw')
+  })
+
+setMethod(
+  f = "dbGetRaw",
+  signature = signature(db = "LevelDB", keys = "character"),
+  definition = function(db, keys){
+    return(cppDbGetRaw(db@ptr, keys))
+  })
+
+#' @export
+setGeneric(
   name = "dbPut",
   def = function(db, keys, values, sync = FALSE){
     standardGeneric('dbPut')
