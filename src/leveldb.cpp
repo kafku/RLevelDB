@@ -4,6 +4,9 @@
 #include <Rcpp.h>
 #include <leveldb/db.h>
 #include <leveldb/write_batch.h>
+#include <boost/shared_ptr.hpp>
+
+// [[Rcpp::depends(BH)]]
 
 // [[Rcpp::export]]
 SEXP cppOpenLevelDB(const std::string &path, const bool create)
@@ -109,7 +112,7 @@ Rcpp::List cppApply(SEXP xpt,
 {
   Rcpp::XPtr<leveldb::DB> ptr(xpt);
 
-  leveldb::Iterator *it = ptr->NewIterator(leveldb::ReadOptions());
+  boost::shared_ptr<leveldb::Iterator> it(ptr->NewIterator(leveldb::ReadOptions()));
   Rcpp::List result_list;
   uint count_item = 0;
   for(it->SeekToFirst(); it->Valid(); it->Next()){
@@ -125,7 +128,6 @@ Rcpp::List cppApply(SEXP xpt,
     }
   }
 
-  delete it;
 
   return result_list;
 }
