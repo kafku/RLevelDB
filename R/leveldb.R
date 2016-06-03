@@ -83,6 +83,24 @@ setMethod(
     delete.leveldb(db, keys)
   })
 
+#' @export
+setGeneric(
+  name = "dbApply",
+  def = function(db, FUN, n = 0, ...){
+    standardGeneric("dbApply")
+  })
+
+setMethod(
+  f = "dbApply",
+  signature = signature(db = "LevelDB", FUN = "function", n = "numeric"),
+  definition = function(db, FUN, n, ...){
+    FUN <- match.fun(FUN)
+    if(n < 0) {
+      stop("n must be non negative.")
+    }
+
+    return(cppApply(db@ptr, FUN, n))
+  })
 
 #' @export
 OpenLevelDB <- function(path, create = FALSE){

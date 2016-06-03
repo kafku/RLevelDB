@@ -7,10 +7,11 @@ Maintainer: Kazuki Fukui <kazunoko93+github@gmail.com>
 Description:
 License: GPL (>= 2)
 Depends:
-    R (>= 3.2.0)
+    R (>= 3.2.0),
+    BH (>= 1.60.0)
 Imports:
     Rcpp (>= 0.12.5)
-LinkingTo: Rcpp
+LinkingTo: Rcpp, BH
 URL: https://github.com/kafku/RLevelDB
 BugReports: https://github.com/kafku/RLevelDB/issues
 LazyData: TRUE
