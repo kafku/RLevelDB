@@ -5,7 +5,6 @@ setClass(
   slots = list(path = "character", ptr = "externalptr"))
 
 #' @export
-#' @export
 setGeneric(
   name = "dbGet",
   def = function(db, keys){
