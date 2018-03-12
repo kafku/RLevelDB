@@ -2,6 +2,16 @@
 
 R interface for [LevelDB](https://github.com/google/leveldb).
 
+## Installation
+
+The package is not on CRAN. Please use `devtools::install_github` to install directly from github.
+
+```R
+install.packages('devtools')
+library(devtools)
+install_github(repo = 'kafku/RLevelDB@develop')
+```
+
 ## Examples
 
 ```R
